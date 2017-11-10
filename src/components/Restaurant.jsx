@@ -23,8 +23,7 @@ const Restaurant = props => {
                     </div>
                 </div>
             </div>
-        </div>
-        <p class="attr">
+        <p className="attr">
             Description from "28 Fictional Restaurants That Should Actually Be Real" By Mallory McInnis.https : //www.buzzfeed.com/mallorymcinnis/i-want-to-get-drunk-at-paddys-while-eating-a-bluth-banana
         </p>
         </div>
