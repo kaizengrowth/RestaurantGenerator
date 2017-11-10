@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Restaurant from './Restaurant';
+
 class Splash extends Component {
     render () {
         return (
