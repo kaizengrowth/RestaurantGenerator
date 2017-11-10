@@ -6,7 +6,7 @@ class Splash extends Component {
     constructor() {
         super();
         this.state = {
-            emoji : '😱',
+            emoji: '😱',
             apiData: {
                 restaurant: {
                     name: null,
@@ -29,8 +29,8 @@ class Splash extends Component {
         this.getRandomRestaurant();
     }
 
-    get RandomEmoji() {
-        const arr = new Array(12869 - 128512)
+    getRandomEmoji() {
+        const arr = new Array(128697 - 128512)
             .fill()
             .map((d, i) => (i + 128512).toString(16));
         const random = Math.floor(Math.random() * arr.length);
@@ -40,37 +40,36 @@ class Splash extends Component {
         });
     }
 
-    get RandomRestaurant() {
+    getRandomRestaurant() {
         fetch('http://fictional-restaurants.herokuapp.com/api/restaurants/random')
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    apiData: res.data,
-                });
-            })
-            .catch(err => console.log(err));
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                apiData: res.data,
+            });
+        })
+        .catch(err => console.log(err));
     }
 
-    render () {
+    render() {
         return (
             <div className="top">
                 <div className="introtext">
                     <div className="emoji">
-                        <p>😱</p>
                         <p onClick={this.getRandomEmoji}>{this.state.emoji}</p>
                     </div> 
                     <div className="splashtext">
                         <h1>Today, the Thundercats are lunching at...</h1>
                     </div>
-                    <Restaurant 
-                        restaurant={this.state.apiData.restaurant}
-                        attr={this.state.apiData.attr}
-                    />
-                    <div className="new-restauraunt-button">
-                        <span className="button" onClick={this.getRandomRestaurant}>
-                            Get another restaurant!
-                        </span>
-                    </div>
+                </div>
+                <Restaurant 
+                    restaurant={this.state.apiData.restaurant}
+                    attr={this.state.apiData.attr}
+                />
+                <div className="new-restauraunt-button">
+                    <span className="button" onClick={this.getRandomRestaurant}>
+                        Get another restaurant!
+                    </span>
                 </div>
             </div>
         );

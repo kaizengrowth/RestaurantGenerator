@@ -5,10 +5,9 @@ const Restaurant = props => {
         <div className="restaurant">
             <div className="main">
                 <div className="image" 
-                    style={{ backgroundImage:
-                        'url(${props.restaurant.image})'
-                    }}
-                />
+                    style={{backgroundImage:
+                        `url(${props.restaurant.image})`}}>
+                </div>
                 <div className="info">
                     <h3>{props.restaurant.name}</h3>
                     <div className="meta">
@@ -17,9 +16,7 @@ const Restaurant = props => {
                         <span className="category">{props.restaurant.category}</span>
                     </div>
                     <div className="description">
-                        <p>
-                            {props.restaurant.description}
-                        </p>
+                        <p>{props.restaurant.description}</p>
                     </div>
                 </div>
             </div>
