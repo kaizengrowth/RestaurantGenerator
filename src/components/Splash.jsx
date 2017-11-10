@@ -7,9 +7,26 @@ class Splash extends Component {
         super();
         this.state = {
             emoji : '😱',
+            apiData: {
+                restaurant: {
+                    name: null,
+                    description: null,
+                    category: null,
+                    id: null,
+                    media_category: null,
+                    source: null,
+                    image: null,
+                },
+                attr: null,
+            }
         }
 
         this.getRandomEmoji = this.getRandomEmoji.bind(this);
+        this.getRandomRestaurant = this.getRandomRestaurant.bind(this);
+    }
+
+    componentDidMount() {
+        this.getRandomRestaurant();
     }
 
     get RandomEmoji() {
@@ -23,6 +40,17 @@ class Splash extends Component {
         });
     }
 
+    get RandomRestaurant() {
+        fetch('http://fictional-restaurants.herokuapp.com/api/restaurants/random')
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    apiData: res.data,
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
     render () {
         return (
             <div className="top">
@@ -34,9 +62,12 @@ class Splash extends Component {
                     <div className="splashtext">
                         <h1>Today, the Thundercats are lunching at...</h1>
                     </div>
-                    <Restaurant />
+                    <Restaurant 
+                        restaurant={this.state.apiData.restaurant}
+                        attr={this.state.apiData.attr}
+                    />
                     <div className="new-restauraunt-button">
-                        <span className="button">
+                        <span className="button" onClick={this.getRandomRestaurant}>
                             Get another restaurant!
                         </span>
                     </div>
