@@ -7,18 +7,8 @@ class Splash extends Component {
         super();
         this.state = {
             emoji: '😱',
-            apiData: {
-                restaurant: {
-                    name: null,
-                    description: null,
-                    category: null,
-                    id: null,
-                    media_category: null,
-                    source: null,
-                    image: null,
-                },
-                attr: null,
-            }
+            apiDataLoaded: false,
+            apiData: null,
         }
 
         this.getRandomEmoji = this.getRandomEmoji.bind(this);
@@ -46,6 +36,7 @@ class Splash extends Component {
         .then(res => {
             this.setState({
                 apiData: res.data,
+                apiDataLoaded: true,
             });
         })
         .catch(err => console.log(err));
@@ -62,10 +53,13 @@ class Splash extends Component {
                         <h1>Today, the Thundercats are lunching at...</h1>
                     </div>
                 </div>
-                <Restaurant 
-                    restaurant={this.state.apiData.restaurant}
-                    attr={this.state.apiData.attr}
-                />
+                {this.state.apiDataLoaded ?
+                    <Restaurant 
+                        restaurant={this.state.apiData.restaurant}
+                        attr={this.state.apiData.attr}
+                    /> 
+                    : <p>Loading...</p>
+                }
                 <div className="new-restauraunt-button">
                     <span className="button" onClick={this.getRandomRestaurant}>
                         Get another restaurant!
