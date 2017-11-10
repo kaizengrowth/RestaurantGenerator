@@ -7,7 +7,7 @@ const RestaurantList = props => {
         <div className="restaurant-list">
             {props.restaurantList.map(restaurant => {
                 return (
-                    <Short Restaurant
+                    <ShortRestaurant
                         name={restaurant.name}
                         description={restaurant.description}
                         image={restaurant.image}
